@@ -1,4 +1,4 @@
-import sys,tweepy,csv,re
+import tweepy
 from textblob import TextBlob   
 
 class HashtagAnalyzer():
@@ -14,23 +14,29 @@ class HashtagAnalyzer():
         auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
         auth.set_access_token(accessToken, accessTokenSecret)
         self.api = tweepy.API(auth)
-
+         polarity = 0
+         positive = 0
+         negative = 0
+         neutral = 0
+         # input for term to be searched and how many tweets to search
+         searchTerm = input("Enter HashTag : ")
+         noOfTerms = int(input("Enter the number of tweets to search: "))
+    def percentage (part,whole):
+        return 100 * float(part)/float(whole)     
     def analyse(self):
         tweets = tweepy.Cursor(self.api.search, q=self.hashtag).items(self.noOfTweets)
         for tweet in tweets:
-            print(tweet.text)
-        # continue
+            analysis = TextBlob(tweet.text)
+            polarity += analysis.sentiment.polarity
+            if(analysis.sentiment.polarity == 0):
+                neutral
+            elif(analysis.sentiment.polarity > 0.00):
+                positive += 1
+            elif(analysis.sentiment.polarity < 0.00):
+                negative += 1
 
 
 if __name__ == "__main__":
-    # input for term to be searched and how many tweets to search
-    searchTerm = input("Enter HashTag : ")
-    noOfTerms = int(input("Enter the number of tweets to search: "))
-
-    polarity = 0
-    positive = 0
-    negative = 0
-    neutral = 0
 
     ha = HashtagAnalyzer(searchTerm, noOfTerms)
     ha.analyse()
