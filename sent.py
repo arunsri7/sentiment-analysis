@@ -1,12 +1,9 @@
 import tweepy
 from textblob import TextBlob   
-# input for term to be searched and how many tweets to search
-
 class HashtagAnalyzer():
     def __init__(self):
         self.tweet = []
         self.tweetText = []
-        # initialize tweepy
         consumerKey = 'qrsbHJP4D0YiUlcvyJICE0mON'
         consumerSecret = '54ImsKFqQf83Cvdjcvr0qVbx6Xn9zFM8c5cIH879vcp3BmnU9b'
         accessToken = '224946576-OxRFcJylUuP2O38q5v1cL1FtQ89AzdTaHxlpXkse'
